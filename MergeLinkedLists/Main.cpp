@@ -1,5 +1,6 @@
 #include<iostream>
 #include <list>
+#include <vector>
 
  //Definition for singly-linked list.
  struct ListNode
@@ -104,28 +105,52 @@ ListNode* altMergeTwoLists(ListNode* l1, ListNode* l2)
         return l1;
     }
 
-    std::list<ListNode*> newList1;
-    std::list<ListNode*> newList2;
-
-    // ListNode* newHead1 = new ListNode;
-    // ListNode* newHead2 = new ListNode;
+    std::list<int> list1Vals;
+    std::list<int> list2Vals;
 
     while (l1 != nullptr)
     {
-        newList1.push_back(l1);
+        //newList1.push_back(l1);
+        list1Vals.push_back(l1->val);
         l1 = l1->next;
     }
 
     while (l2 != nullptr)
     {
-        newList2.push_back(l2);
+        //newList2.push_back(l2);
+        list2Vals.push_back(l2->val);
         l2 = l2->next;
     }
 
-    // Merge/Splice into 1 list
-    newList1.splice(newList1.end(), newList2);
+    // Merge into 1 list
+    list1Vals.merge(list2Vals);
 
-    return newList1.front();
+    ListNode* newHead = new ListNode;
+    ListNode* newTail = new ListNode;
+    newTail = newHead;
+
+    int loopLimit = list1Vals.size();
+    int count = 0;
+
+    // Repopulate a new list with custom listNode type using the int values to initialise the int var
+    for (auto iter = list1Vals.begin(); iter != list1Vals.end(); ++iter)
+    {
+        newTail->val = *iter;
+
+        // Carry out some check here to see if we're at the end
+        // This is req otherwise we create an extra node at the end
+        // of the list that is NOT used and with a value of zero
+        if (count < loopLimit - 1)
+        {
+            ListNode* temp = new ListNode;
+            newTail->next = temp;
+            newTail = newTail->next;
+        }
+
+        ++count;
+    }
+
+    return newHead;
 }
 
 int main()
@@ -146,8 +171,8 @@ int main()
     secondHead->next = new ListNode(9);
     secondHead = list2.front();
 
-    //ListNode* mergedLists = altMergeTwoLists(firstHead, secondHead);
-    ListNode* mergedLists = mergeTwoLists(firstHead, secondHead);
+    ListNode* mergedLists = altMergeTwoLists(firstHead, secondHead);
+    //ListNode* mergedLists = mergeTwoLists(firstHead, secondHead);
 
     while (mergedLists != nullptr)
     {
