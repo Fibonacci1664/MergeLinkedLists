@@ -13,86 +13,86 @@
      ListNode(int x, ListNode *next) : val(x), next(next) {}
  };
  
-ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)
-{
-     if(l1 == nullptr)
-     {
-         return l2;
-     }
-     else if(l2 == nullptr)
-     {
-         return l1;
-     }
-
-     // Create a new empty head node
-     ListNode* newHead = new ListNode;
-
-     // Check first nodes against each other
-     if (l1->val <= l2->val)
-     {
-         // If l1 is less than l2 then set the newHead value to be that of l1
-         newHead->val = l1->val;
-
-         // Advance to next node is l1 list
-         l1 = l1->next;
-     }
-     else
-     {
-         // If l1 is less than l2 then set the newHead value to be that of l1
-         newHead->val = l2->val;
-
-         // Advance to next node is l2 list
-         l2 = l2->next;
-     }
-
-     // Create a new tail node, set it to also point to the new head node
-     ListNode* newTail = newHead;
-
-     // Loop over existing nodes until we hit a nullptr in one of the lists
-     while (l1 != nullptr && l2 != nullptr)
-     {
-         ListNode* temp = new ListNode;
-
-         if (l1->val <= l2->val)
-         {
-             // Save location of l1
-             temp = l1;
-
-             // Advance l1 to next node
-             l1 = l1->next;
-         }
-         else
-         {
-             // Save location of l2
-             temp = l2;
-
-             // Advance l2 to next node
-             l2 = l2->next;
-         }
-
-         // Set the next node is the new list to be that which was saved
-         newTail->next = temp;
-
-         // Update the tail position to relfect correctly pointing at the tail node
-         newTail = temp;
-     }
-
-     // Once we get to here, one of the list has reached nullptr
-     if (l1 == nullptr)
-     {
-         // Append l2 node
-         newTail->next = l2;
-         newTail = l2;
-     }
-     else if (l2 == nullptr)
-     {
-         // Otherwise append l1 node
-         newTail->next = l1;
-         newTail = l1;
-     }
-
-     return newHead;
-}
+//ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)
+//{
+//     if(l1 == nullptr)
+//     {
+//         return l2;
+//     }
+//     else if(l2 == nullptr)
+//     {
+//         return l1;
+//     }
+//
+//     // Create a new empty head node
+//     ListNode* newHead = new ListNode;
+//
+//     // Check first nodes against each other
+//     if (l1->val <= l2->val)
+//     {
+//         // If l1 is less than l2 then set the newHead value to be that of l1
+//         newHead->val = l1->val;
+//
+//         // Advance to next node is l1 list
+//         l1 = l1->next;
+//     }
+//     else
+//     {
+//         // If l1 is less than l2 then set the newHead value to be that of l1
+//         newHead->val = l2->val;
+//
+//         // Advance to next node is l2 list
+//         l2 = l2->next;
+//     }
+//
+//     // Create a new tail node, set it to also point to the new head node
+//     ListNode* newTail = newHead;
+//
+//     // Loop over existing nodes until we hit a nullptr in one of the lists
+//     while (l1 != nullptr && l2 != nullptr)
+//     {
+//         ListNode* temp = new ListNode;
+//
+//         if (l1->val <= l2->val)
+//         {
+//             // Save location of l1
+//             temp = l1;
+//
+//             // Advance l1 to next node
+//             l1 = l1->next;
+//         }
+//         else
+//         {
+//             // Save location of l2
+//             temp = l2;
+//
+//             // Advance l2 to next node
+//             l2 = l2->next;
+//         }
+//
+//         // Set the next node is the new list to be that which was saved
+//         newTail->next = temp;
+//
+//         // Update the tail position to relfect correctly pointing at the tail node
+//         newTail = temp;
+//     }
+//
+//     // Once we get to here, one of the list has reached nullptr
+//     if (l1 == nullptr)
+//     {
+//         // Append l2 node
+//         newTail->next = l2;
+//         newTail = l2;
+//     }
+//     else if (l2 == nullptr)
+//     {
+//         // Otherwise append l1 node
+//         newTail->next = l1;
+//         newTail = l1;
+//     }
+//
+//     return newHead;
+//}
 
 ListNode* altMergeTwoLists(ListNode* l1, ListNode* l2)
 {
@@ -126,8 +126,7 @@ ListNode* altMergeTwoLists(ListNode* l1, ListNode* l2)
     list1Vals.merge(list2Vals);
 
     ListNode* newHead = new ListNode;
-    ListNode* newTail = new ListNode;
-    newTail = newHead;
+    ListNode* newTail = newHead;
 
     int loopLimit = list1Vals.size();
     int count = 0;
